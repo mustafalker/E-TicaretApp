@@ -1,0 +1,66 @@
+<div class="main-content">
+          <div class="container-fluid">
+              <div class="card">
+                  <div class="card-header card-header-danger">
+                      <h3 class="card-title">Update</h3>
+                      <p class="card-category">Handcrafted by our friend
+                          <a target="_blank" href="https://github.com/mustafalker">Mustafa Ülker</a>. Please checkout the
+                          <a href="http://bootstrap-notify.remabledesigns.com/" target="_blank">My Personel Account.</a>
+                      </p>
+                  </div>
+                  <div class="card-body">
+                      <form #form="ngForm" class="form-group">
+                          <div class="row">
+                              <div class="col-md-6">
+                                  <mat-form-field class="example-full-width">
+                                      <input type="number" matInput placeholder="id" required name="id"
+                                         novalidate autocomplete="off" min="1" max="2147483646">
+                                  </mat-form-field>
+                              </div>
+                              <div class="col-md-6">
+                                  <mat-form-field class="example-full-width">
+                                      <input matInput placeholder="postId" name="postId" required
+                                          novalidate autocomplete="off">
+                                  </mat-form-field>
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="col-md-6">
+                                  <mat-form-field class="example-full-width">
+                                      <input type="text" matInput placeholder="Name" type="text" name="Name"
+                                        required novalidate autocomplete="off">
+                                  </mat-form-field>
+                              </div>
+                              <div class="col-md-6">
+                                  <mat-form-field class="example-full-width">
+                                      <input type="email" matInput placeholder="someone@example.com" name="Email"
+                                          required novalidate autocomplete="off">
+                                  </mat-form-field>
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="col-md-12">
+                                  <label>Enter Your Comment</label>
+                                  <mat-form-field class="example-full-width">
+                                      <textarea matInput
+                                          placeholder="You can enter the comment you want to add in the field below."
+                                          name="comment" required novalidate
+                                          autocomplete="off"></textarea>
+                                  </mat-form-field>
+                              </div>
+                          </div>
+                          <button type="submit" class="btn btn-danger pull-right"
+                              [disabled]="form.invalid">Profili Güncelle</button>
+                          <div class="clearfix"></div>
+                      </form>
+                      <div class="row mt100">
+                          <div class="col-md-12 d-flex justify-content-center">
+                              <a routerLink="/ana-sayfa" type="button" class="btn btn-lg btn-custom">Go To Home Page</a>
+                          </div>
+                      </div>
+      
+                  </div>
+              </div>
+          </div>
+      </div>
+      

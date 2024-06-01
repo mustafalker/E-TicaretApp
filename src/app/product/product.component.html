@@ -1,0 +1,42 @@
+<div>
+  <h2>Products</h2>
+  <ul>
+    <li *ngFor="let product of products">
+      {{ product?.productName }} - {{ product?.price }} $
+      <button (click)="product?.productId && getProductById(product.productId)">View</button>
+      <button (click)="product?.productId && deleteProduct(product.productId)">Delete</button>
+    </li>
+  </ul>
+  <p *ngIf="products.length === 0">No products available.</p>
+
+  <!-- <div *ngIf="selectedProduct">
+    <h3>Selected Product</h3>
+    <p>{{ selectedProduct?.productName || 'No product selected' }}</p>
+    <p>{{ selectedProduct?.description || 'No description available' }}</p>
+    <p>{{ selectedProduct?.price || 'No price information' }} $</p>
+  </div> -->
+
+  <h3>Add New Product</h3>
+  <form (ngSubmit)="addProduct(newProduct)">
+    <label for="name">Name</label>
+    <input id="name" [(ngModel)]="newProduct.productName" name="name">
+
+    <label for="description">Description</label>
+    <input id="description" [(ngModel)]="newProduct.description" name="description">
+
+    <label for="price">Price</label>
+    <input id="price" [(ngModel)]="newProduct.price" name="price" type="number">
+
+    <label for="stockQuantity">Stock Quantity</label>
+    <input id="stockQuantity" [(ngModel)]="newProduct.stockQuantity" name="stockQuantity" type="number">
+
+    <label for="imageUrl">Image URL</label>
+    <input id="imageUrl" [(ngModel)]="newProduct.imageUrl" name="imageUrl">
+
+    <label for="categoryId">Category ID</label>
+    <input id="categoryId" [(ngModel)]="newProduct.categoryId" name="categoryId" type="number">
+
+    <button type="submit">Add Product</button>
+  </form>
+</div>
+<button routerLink="/ana-sayfa">Ana Sayfaya Dön</button>

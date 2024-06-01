@@ -1,0 +1,10 @@
+/* product-card.component.css */
+.card {
+  margin: 10px;
+}
+
+.card img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+}
