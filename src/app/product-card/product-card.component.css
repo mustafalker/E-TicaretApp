@@ -1,10 +1,30 @@
-/* product-card.component.css */
 .card {
   margin: 10px;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 .card img {
-  width: 200px;
+  width: 100%;
   height: 200px;
   object-fit: cover;
+}
+
+.card-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.card-text {
+  font-size: 1rem;
+}
+
+.card-footer {
+  background-color: #f8f9fa;
 }

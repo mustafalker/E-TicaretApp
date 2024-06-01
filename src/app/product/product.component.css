@@ -1,0 +1,36 @@
+.card {
+          margin: 10px;
+          border-radius: 10px;
+          overflow: hidden;
+          transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .card:hover {
+          transform: scale(1.05);
+          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .card img {
+          width: 100%;
+          height: 150px; /* Yüksekliği küçülttük */
+          object-fit: cover;
+        }
+        
+        .card-title {
+          font-size: 1.1rem; /* Yazı boyutunu küçülttük */
+          font-weight: bold;
+        }
+        
+        .card-text {
+          font-size: 0.9rem; /* Yazı boyutunu küçülttük */
+        }
+        
+        .card-footer {
+          background-color: #f8f9fa;
+        }
+        
+        .btn-danger {
+          font-size: 1rem; /* Buton yazı boyutunu büyüttük */
+          padding: 10px 20px; /* Buton boyutunu büyüttük */
+        }
+        

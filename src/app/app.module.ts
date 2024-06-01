@@ -16,7 +16,7 @@ import { ToDoListComponent } from './to-do-list/to-do-list.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatCardModule } from '@angular/material/card';
 import { MatRadioModule } from '@angular/material/radio';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProfilKayitComponent } from './profil-kayit/profil-kayit.component';
 import { NgbDropdownModule, NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatDividerModule } from '@angular/material/divider';
@@ -42,6 +42,7 @@ const keycloakService = new KeycloakService();
   ],
   imports: [
     BrowserModule,
+    ReactiveFormsModule,
     KeycloakAngularModule,
     AppRoutingModule,
     NgbModule,

@@ -3,6 +3,7 @@ import { ProductService } from '../services/product.service';
 import { Product } from '../model/product';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-product',
@@ -12,21 +13,23 @@ import { Router } from '@angular/router';
 export class ProductComponent implements OnInit {
   products: Product[] = [];
   selectedProduct: Product | null = null;
-  newProduct: Product = {
-    productId: 0,
-    productName: '',
-    description: '',
-    price: 0,
-    stockQuantity: 0,
-    imageUrl: '',
-    categoryId: 0
-  };
+  productForm: FormGroup;
 
   constructor(
-    private productService: ProductService, 
+    private productService: ProductService,
     private toastr: ToastrService,
-    private router: Router
-  ) { }
+    private router: Router,
+    private fb: FormBuilder
+  ) {
+    this.productForm = this.fb.group({
+      productName: ['', Validators.required],
+      description: ['', Validators.required],
+      price: [0, [Validators.required, Validators.min(0)]],
+      stockQuantity: [0, [Validators.required, Validators.min(0)]],
+      imageUrl: ['', Validators.required],
+      categoryId: [0, [Validators.required, Validators.min(0)]]
+    });
+  }
 
   ngOnInit(): void {
     this.getProducts();
@@ -59,28 +62,32 @@ export class ProductComponent implements OnInit {
     });
   }
 
-  addProduct(product: Product): void {
-    this.productService.addProduct(product).subscribe({
-      next: (newProduct) => {
-        this.products.push(newProduct);
-        this.toastr.success('Product added successfully!', 'Success');
-        this.router.navigate(['/products']);
-        this.newProduct = {
-          productId: 0,
-          productName: '',
-          description: '',
-          price: 0,
-          stockQuantity: 0,
-          imageUrl: '',
-          categoryId: 0
-        };
-      },
-      error: (err) => {
-        console.error('Error adding product:', err);
-        this.toastr.error('Failed to add product.', 'Error');
-      }
-    });
-
+  addProduct(): void {
+    if (this.productForm.valid) {
+      this.productService.addProduct(this.productForm.value).subscribe({
+        next: (newProduct) => {
+          this.products.push(newProduct);
+          this.toastr.success('Product added successfully!', 'Success');
+          this.productForm.reset({
+            productId: 0,
+            productName: '',
+            description: '',
+            price: 0,
+            stockQuantity: 0,
+            imageUrl: '',
+            categoryId: 0
+          });
+          this.router.navigate(['/products']);
+        },
+        error: (err) => {
+          console.error('Error adding product:', err);
+          this.toastr.error('Failed to add product.', 'Error');
+        }
+      });
+    } else {
+      this.productForm.markAllAsTouched();
+      this.toastr.error('Please fill all required fields correctly.', 'Error');
+    }
   }
 
   updateProduct(product: Product): void {

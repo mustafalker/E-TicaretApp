@@ -1,42 +1,62 @@
-<div>
-  <h2>Products</h2>
-  <ul>
-    <li *ngFor="let product of products">
-      {{ product?.productName }} - {{ product?.price }} $
-      <button (click)="product?.productId && getProductById(product.productId)">View</button>
-      <button (click)="product?.productId && deleteProduct(product.productId)">Delete</button>
-    </li>
-  </ul>
-  <p *ngIf="products.length === 0">No products available.</p>
+<div class="container mt-5">
+  <h1 class="display-4 mb-4 text-center">Ürünler</h1>
+  <hr>
+  <div class="row">
+    <div class="col-md-4 mb-4" *ngFor="let product of products">
+      <div class="card h-100">
+        <img class="card-img-top" [src]="product?.imageUrl || 'https://via.placeholder.com/150'" alt="{{ product?.['productName'] }}">
+        <div class="card-body">
+          <h5 class="card-title">{{ product?.['productName'] }}</h5>
+          <p class="card-text">{{ product?.description || 'Açıklama mevcut değil' }}</p>
+          <p class="card-text"><strong>{{ product?.price }} ₺</strong></p>
+          <p class="card-text"><small class="text-muted">Stok: {{ product?.stockQuantity }}</small></p>
+        </div>
+        <div class="card-footer">
+          <button class="btn btn-danger btn-lg w-100" (click)="deleteProduct(product.productId)">Sil</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p *ngIf="products.length === 0" class="text-center">Mevcut ürün yok.</p>
 
-  <!-- <div *ngIf="selectedProduct">
-    <h3>Selected Product</h3>
-    <p>{{ selectedProduct?.productName || 'No product selected' }}</p>
-    <p>{{ selectedProduct?.description || 'No description available' }}</p>
-    <p>{{ selectedProduct?.price || 'No price information' }} $</p>
-  </div> -->
-
-  <h3>Add New Product</h3>
-  <form (ngSubmit)="addProduct(newProduct)">
-    <label for="name">Name</label>
-    <input id="name" [(ngModel)]="newProduct.productName" name="name">
-
-    <label for="description">Description</label>
-    <input id="description" [(ngModel)]="newProduct.description" name="description">
-
-    <label for="price">Price</label>
-    <input id="price" [(ngModel)]="newProduct.price" name="price" type="number">
-
-    <label for="stockQuantity">Stock Quantity</label>
-    <input id="stockQuantity" [(ngModel)]="newProduct.stockQuantity" name="stockQuantity" type="number">
-
-    <label for="imageUrl">Image URL</label>
-    <input id="imageUrl" [(ngModel)]="newProduct.imageUrl" name="imageUrl">
-
-    <label for="categoryId">Category ID</label>
-    <input id="categoryId" [(ngModel)]="newProduct.categoryId" name="categoryId" type="number">
-
-    <button type="submit">Add Product</button>
+  <h1 class="display-4 mt-5 mb-4 text-center">Yeni Ürün Ekle</h1>
+  <hr>
+  <form [formGroup]="productForm" (ngSubmit)="addProduct()" class="mt-3">
+    <div class="mb-3" [ngClass]="{'has-error': productForm.controls['productName'].invalid && productForm.controls['productName'].touched}">
+      <label for="name" class="form-label">İsim</label>
+      <input id="name" formControlName="productName" name="name" class="form-control">
+      <div *ngIf="productForm.controls['productName'].invalid && productForm.controls['productName'].touched" class="text-danger">İsim gereklidir</div>
+    </div>
+    <div class="mb-3" [ngClass]="{'has-error': productForm.controls['description'].invalid && productForm.controls['description'].touched}">
+      <label for="description" class="form-label">Açıklama</label>
+      <input id="description" formControlName="description" name="description" class="form-control">
+      <div *ngIf="productForm.controls['description'].invalid && productForm.controls['description'].touched" class="text-danger">Açıklama gereklidir</div>
+    </div>
+    <div class="mb-3" [ngClass]="{'has-error': productForm.controls['price'].invalid && productForm.controls['price'].touched}">
+      <label for="price" class="form-label">Fiyat</label>
+      <input id="price" formControlName="price" name="price" type="number" class="form-control">
+      <div *ngIf="productForm.controls['price'].invalid && productForm.controls['price'].touched" class="text-danger">Fiyat bir sayı olmalıdır</div>
+    </div>
+    <div class="mb-3" [ngClass]="{'has-error': productForm.controls['stockQuantity'].invalid && productForm.controls['stockQuantity'].touched}">
+      <label for="stockQuantity" class="form-label">Stok Miktarı</label>
+      <input id="stockQuantity" formControlName="stockQuantity" name="stockQuantity" type="number" class="form-control">
+      <div *ngIf="productForm.controls['stockQuantity'].invalid && productForm.controls['stockQuantity'].touched" class="text-danger">Stok miktarı bir sayı olmalıdır</div>
+    </div>
+    <div class="mb-3" [ngClass]="{'has-error': productForm.controls['imageUrl'].invalid && productForm.controls['imageUrl'].touched}">
+      <label for="imageUrl" class="form-label">Resim URL'si</label>
+      <input id="imageUrl" formControlName="imageUrl" name="imageUrl" class="form-control">
+      <div *ngIf="productForm.controls['imageUrl'].invalid && productForm.controls['imageUrl'].touched" class="text-danger">Resim URL'si gereklidir</div>
+    </div>
+    <div class="mb-3" [ngClass]="{'has-error': productForm.controls['categoryId'].invalid && productForm.controls['categoryId'].touched}">
+      <label for="categoryId" class="form-label">Kategori ID</label>
+      <input id="categoryId" formControlName="categoryId" name="categoryId" type="number" class="form-control">
+      <div *ngIf="productForm.controls['categoryId'].invalid && productForm.controls['categoryId'].touched" class="text-danger">Kategori ID'si bir sayı olmalıdır</div>
+    </div>
+    <div class="d-flex justify-content-center">
+      <button type="submit" class="btn btn-primary">Ürün Ekle</button>
+    </div>
   </form>
+  <div class="d-flex justify-content-center mt-4">
+    <button routerLink="/ana-sayfa" class="btn btn-danger mb-4">Ana Sayfaya Dön</button>
+  </div>
 </div>
-<button routerLink="/ana-sayfa">Ana Sayfaya Dön</button>
