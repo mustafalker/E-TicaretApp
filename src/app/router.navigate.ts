@@ -27,7 +27,7 @@ export class LoginComponent {
   }
 
   hasMustafaRole(): boolean {
-    const desiredRole = 'Mustafa'; 
+    const desiredRole = 'Satıcı'; 
     const userRoles = this.keycloak.getUserRoles();
   
     return userRoles.includes(desiredRole);

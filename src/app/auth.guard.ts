@@ -10,7 +10,7 @@ export class AuthGuard implements CanActivate {
     constructor(private keycloak: KeycloakService, private router: Router ) {}
   
     async canActivate(): Promise<boolean> {
-      if (await this.keycloak.isLoggedIn() && this.keycloak.isUserInRole('mustafa')) {
+      if (await this.keycloak.isLoggedIn() && this.keycloak.isUserInRole('Satıcı')) {
         return true; 
       } else {
         alert("Bu sayfaya giriş yapma yetkiniz yoktur. ")

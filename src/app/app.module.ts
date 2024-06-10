@@ -12,7 +12,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
-import { ToDoListComponent } from './to-do-list/to-do-list.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatCardModule } from '@angular/material/card';
 import { MatRadioModule } from '@angular/material/radio';
@@ -25,6 +24,8 @@ import { ProductComponent } from './product/product.component';
 import { ProductCardComponent } from './product-card/product-card.component';
 import { ToastrModule } from 'ngx-toastr';
 import { ProductPipePipe } from './product/product.pipe.pipe';
+import { PaymentFormComponent } from './payment-form/payment-form.component';
+import { CartComponent } from './cart/cart.component';
 
 const keycloakService = new KeycloakService();
 
@@ -34,11 +35,12 @@ const keycloakService = new KeycloakService();
     LoginComponent,
     UserComponent,
     AnaSayfaComponent,
-    ToDoListComponent,
     ProfilKayitComponent,
     ProductComponent,
     ProductCardComponent,
     ProductPipePipe,
+    PaymentFormComponent,
+    CartComponent,
   ],
   imports: [
     BrowserModule,

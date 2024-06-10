@@ -1,0 +1,73 @@
+<h1 class="mb-4 text-center">Payment Form</h1>
+
+<!-- Use MatCard for better visual separation -->
+<mat-card class="mx-auto my-5 p-4" style="max-width: 500px;">
+  <form (ngSubmit)="onSubmit()" #paymentForm="ngForm" class="row g-3">
+    
+    <!-- Card Holder Name -->
+    <div class="col-12">
+      <mat-form-field class="w-100" appearance="outline">
+        <mat-label>Card Holder Name</mat-label>
+        <input matInput type="text" id="cardHolderName" name="cardHolderName" [(ngModel)]="paymentData.cardHolderName" required>
+      </mat-form-field>
+    </div>
+
+    <!-- Card Number -->
+    <div class="col-12">
+      <mat-form-field class="w-100" appearance="outline">
+        <mat-label>Card Number</mat-label>
+        <input matInput type="text" id="cardNumber" name="cardNumber" [(ngModel)]="paymentData.cardNumber" required>
+      </mat-form-field>
+    </div>
+
+    <!-- Expire Month -->
+    <div class="col-md-6">
+      <mat-form-field class="w-100" appearance="outline">
+        <mat-label>Expire Month</mat-label>
+        <input matInput type="text" id="expireMonth" name="expireMonth" [(ngModel)]="paymentData.expireMonth" required>
+      </mat-form-field>
+    </div>
+
+    <!-- Expire Year -->
+    <div class="col-md-6">
+      <mat-form-field class="w-100" appearance="outline">
+        <mat-label>Expire Year</mat-label>
+        <input matInput type="text" id="expireYear" name="expireYear" [(ngModel)]="paymentData.expireYear" required>
+      </mat-form-field>
+    </div>
+
+    <!-- CVC -->
+    <div class="col-md-6">
+      <mat-form-field class="w-100" appearance="outline">
+        <mat-label>CVC</mat-label>
+        <input matInput type="text" id="cvc" name="cvc" [(ngModel)]="paymentData.cvc" required>
+      </mat-form-field>
+    </div>
+
+    <!-- Price -->
+    <div class="col-md-6">
+      <mat-form-field class="w-100" appearance="outline">
+        <mat-label>Price</mat-label>
+        <input matInput type="text" id="price" name="price" [(ngModel)]="paymentData.price" required>
+      </mat-form-field>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="col-12 text-center">
+      <button mat-raised-button color="primary" type="submit">Pay Now</button>
+    </div>
+
+  </form>
+
+  <!-- Back Button -->
+  <div class="text-center mt-4">
+    <button mat-stroked-button color="warn" (click)="goBack()">Back</button>
+  </div>
+</mat-card>
+
+<!-- Payment Response -->
+<div *ngIf="paymentResponse" class="mt-5 text-center">
+  <h2>Payment Result</h2>
+  <p>Status: {{ paymentResponse.status }}</p>
+  <p>Payment ID: {{ paymentResponse.paymentId }}</p>
+</div>

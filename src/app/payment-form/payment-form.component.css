@@ -1,0 +1,28 @@
+/* Center the mat-card on the page */
+mat-card {
+          margin: 0 auto;
+          padding: 20px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Make the payment form fields look consistent and aligned */
+        mat-form-field {
+          display: block;
+          margin-bottom: 20px;
+        }
+        
+        /* Center-align the header */
+        h1 {
+          font-size: 2rem;
+          color: #495057;
+        }
+        
+        button {
+          width: 100%;
+          padding: 10px 0;
+        }
+        
+        .text-center {
+          text-align: center;
+        }
+        

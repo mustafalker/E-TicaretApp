@@ -1,51 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import { KeycloakService } from 'keycloak-angular';
-import { Router } from '@angular/router';
-import { ProductService } from '../services/product.service';
+import { CartService } from '../services/cart.service';
 import { Product } from '../model/product';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
-  selector: 'app-ana-sayfa',
-  templateUrl: './ana-sayfa.component.html',
-  styleUrls: ['./ana-sayfa.component.css']
+  selector: 'app-cart',
+  templateUrl: './cart.component.html',
+  styleUrls: ['./cart.component.css']
 })
-export class AnaSayfaComponent implements OnInit {
-  products: Product[] = [];
-  filteredProducts: Product[] = [];
+export class CartComponent implements OnInit {
   cart: { product: Product, quantity: number }[] = [];
-  searchText: string = '';
-  test: Date = new Date();
 
-  constructor(
-    private keycloak: KeycloakService,
-    private router: Router,
-    private productService: ProductService,
-    private toastr: ToastrService
-  ) {}
+  constructor(private cartService: CartService, private router: Router , private toastr: ToastrService) {}
 
   ngOnInit(): void {
-    this.productService.getProducts().subscribe((products) => {
-      this.products = products;
-      this.filteredProducts = products;
-    });
-    this.toastr.toastrConfig.positionClass = 'toast-top-left';
-  }
-
-  logout() {
-    this.keycloak.logout().then(() => {
-      this.router.navigate(['/login']);
-    }).catch(error => {
-      console.error('Çıkış işlemi başarısız:', error);
-      this.toastr.error('Çıkış işlemi başarısız', 'Hata');
-    });
-  }
-
-  filterProducts() {
-    const filterTextLower = this.searchText.toLowerCase();
-    this.filteredProducts = this.products.filter(product =>
-      product.productName.toLowerCase().includes(filterTextLower)
-    );
+    this.cart = this.cartService.getCart();
   }
 
   addToCart(product: Product) {
@@ -83,18 +53,9 @@ export class AnaSayfaComponent implements OnInit {
   checkout() {
     if (this.cart.length > 0) {
       this.toastr.success('Ödemeniz başarıyla tamamlandı', 'Başarılı');
-      this.cart = [];
+      this.cart = []; // Empty the cart
     } else {
       this.toastr.warning('Sepetiniz boş', 'Uyarı');
     }
-  }
-
-  isInCart(product: Product): boolean {
-    return this.cart.some(item => item.product.productId === product.productId);
-  }
-
-  getProductQuantity(product: Product): number {
-    const cartItem = this.cart.find(item => item.product.productId === product.productId);
-    return cartItem ? cartItem.quantity : 0;
   }
 }

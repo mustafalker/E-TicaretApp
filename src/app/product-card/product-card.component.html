@@ -1,12 +1,9 @@
-<div class="card shadow-sm">
-  <img src="{{ product.imageUrl }}" class="card-img-top" alt="{{ product.productName }}">
+<div class="card">
+  <img [src]="product.imageUrl" class="card-img-top" alt="{{ product.productName }}">
   <div class="card-body">
     <h5 class="card-title">{{ product.productName }}</h5>
     <p class="card-text">{{ product.description }}</p>
-    <p class="card-text"><strong>Fiyat:</strong> {{ product.price }} TL</p>
-    <a href="#" class="btn btn-primary">Satın Al</a>
-  </div>
-  <div class="card-footer">
-    <small class="text-muted">Stok: {{ product.stockQuantity }}</small>
+    <p class="card-text">{{ product.price | currency:'TRY' }}</p>
+    <button class="btn btn-primary" (click)="addToCart(product)">Sepete Ekle</button>
   </div>
 </div>
