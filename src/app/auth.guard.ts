@@ -4,18 +4,18 @@ import { KeycloakService } from 'keycloak-angular';
 import { Observable } from 'rxjs';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
-    constructor(private keycloak: KeycloakService, private router: Router ) {}
-  
-    async canActivate(): Promise<boolean> {
-      if (await this.keycloak.isLoggedIn() && this.keycloak.isUserInRole('Satıcı')) {
-        return true; 
-      } else {
-        alert("Bu sayfaya giriş yapma yetkiniz yoktur. ")
-        this.router.navigate(['/ana-sayfa']); 
-        return false; 
-      }
+  constructor(private keycloak: KeycloakService, private router: Router) { }
+
+  async canActivate(): Promise<boolean> {
+    if (await this.keycloak.isLoggedIn() && this.keycloak.isUserInRole('Satıcı')) {
+      return true;
+    } else {
+      alert("Bu sayfaya giriş yapma yetkiniz yoktur. ")
+      this.router.navigate(['/ana-sayfa']);
+      return false;
     }
   }
+}

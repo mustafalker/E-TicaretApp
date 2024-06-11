@@ -11,7 +11,7 @@ import { PaymentFormComponent } from './payment-form/payment-form.component';
 const routes: Routes = [
   { path: '', redirectTo: '/ana-sayfa', pathMatch: 'full' },
   { path: 'ana-sayfa', component: AnaSayfaComponent },
-  { path: 'user', component: UserComponent, canActivate: [AuthGuard] },
+  { path: 'user', component: UserComponent },
   { path: 'profil-kayit', component: ProfilKayitComponent, },
   { path: 'products', component: ProductComponent, canActivate: [AuthGuard]},
   { path: 'cart', component: CartComponent },

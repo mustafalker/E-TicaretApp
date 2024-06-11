@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Product } from '../model/product';
+import { DomSanitizer } from '@angular/platform-browser';
 
 
 @Injectable({
@@ -10,6 +11,9 @@ export class CartService {
   private cart: { product: Product, quantity: number }[] = [];
   getItems() {
     return this.items;
+  }
+  constructor(private sanitizer : DomSanitizer){
+    
   }
 
   clearCart() {
